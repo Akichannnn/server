@@ -1,0 +1,31 @@
+# Base image: Node.js + Python
+FROM node:18
+
+# Cài đặt các công cụ cần thiết
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    ffmpeg \
+    curl \
+    && apt-get clean
+
+# Tạo thư mục làm việc
+WORKDIR /app
+
+# Copy package.json và package-lock.json nếu có
+COPY package*.json ./
+
+# Cài dependencies
+RUN npm install
+
+# Copy toàn bộ source code
+COPY . .
+
+# Cổng Railway sẽ cung cấp qua biến môi trường PORT
+ENV PORT=9898
+
+# Expose port để Railway biết app chạy ở đâu
+EXPOSE 9898
+
+# Lệnh khởi chạy app
+CMD ["npm", "start"]
