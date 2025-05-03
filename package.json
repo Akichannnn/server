@@ -1,0 +1,36 @@
+[
+{
+  "scripts": {
+    "start": "node j.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "postinstall": "sh .railway/clean.sh"
+  },
+  "devDependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "ffmpeg": "^0.0.4",
+    "googleapis": "^148.0.0",
+    "init": "^0.1.2",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "tmp": "^0.2.3",
+    "youtube-dl-exec": "^3.0.20"
+  },
+  "name": "music-server",
+  "version": "2.0.5",
+  "main": "j.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akichannnn/sever.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akichannnn/server/issues"
+  },
+  "homepage": "https://github.com/Akichannnn/server",
+  "description": ""
+}
+]
