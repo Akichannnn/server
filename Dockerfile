@@ -2,7 +2,7 @@
 FROM node:18
 
 # Cài Python và pip
-RUN apt-get update && apt-get install -y python3 python3-pip
+RUN apt-get update && apt-get install -y python3 python3-pip ffmpeg
 
 # Thiết lập thư mục làm việc chính
 WORKDIR /app
@@ -34,7 +34,6 @@ RUN npm install cors
 RUN npm install axios
 RUN npm install tmp
 RUN npm install ffmpeg
-RUN which ffmpeg && ffmpeg -version
 # Thiết lập biến môi trường mặc định
 ENV PORT=3000
 
