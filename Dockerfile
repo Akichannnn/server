@@ -20,7 +20,7 @@ COPY /requirements.txt ./
 RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 # Copy toàn bộ source code Python
-COPY python_script/ ./
+COPY / ./
 #tìm thằng lồn j.js
 RUN echo "Listing node_app files:" && ls -la /app/
 # Quay lại thư mục chính để khởi động
