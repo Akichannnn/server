@@ -36,6 +36,6 @@ RUN npm install tmp
 RUN npm install ffmpeg
 # Thiết lập biến môi trường mặc định
 ENV PORT=3000
-
+COPY cookies.txt ./cookies.txt
 # Lệnh khởi chạy ứng dụng Node.js
 CMD ["node", "j.js"]
