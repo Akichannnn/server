@@ -4,6 +4,6 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "startCommand": "node node_app/j.js"
+    "startCommand": "node j.js"
   }
 }
