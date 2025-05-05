@@ -46,7 +46,7 @@ app.get("/audio", async (req, res) => {
         extractAudio: true,
         audioFormat: 'mp3',
         audioQuality: '64K',
-        ffmpegLocation: '/data/data/com.termux/files/usr/bin/ffmpeg'
+        ffmpegLocation: '/usr/bin/ffmpeg'
       });
     }
 
