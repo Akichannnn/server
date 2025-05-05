@@ -25,6 +25,7 @@ COPY / ./
 RUN echo "Listing node_app files:" && ls -la /app/
 # Quay lại thư mục chính để khởi động
 WORKDIR /app
+RUN npm install dotenv
 
 # Thiết lập biến môi trường mặc định
 ENV PORT=3000
