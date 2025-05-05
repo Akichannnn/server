@@ -34,7 +34,7 @@ RUN npm install cors
 RUN npm install axios
 RUN npm install tmp
 RUN npm install ffmpeg
-
+RUN which ffmpeg && ffmpeg -version
 # Thiết lập biến môi trường mặc định
 ENV PORT=3000
 
