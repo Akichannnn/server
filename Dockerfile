@@ -4,27 +4,30 @@ FROM node:18
 # Cài Python và pip
 RUN apt-get update && apt-get install -y python3 python3-pip
 
-# Tạo thư mục app
+# Thiết lập thư mục làm việc chính
 WORKDIR /app
 
-# Sao chép và cài đặt dependencies Node.js
-COPY node_app/package*.json ./node_app/
-WORKDIR /app/node_app
+# Copy và cài dependencies Node.js
+COPY /package*.json ./
+WORKDIR /app/
 RUN npm install
 
-# Sao chép toàn bộ mã nguồn Node.js
-COPY node_app/ ./
+# Copy toàn bộ source code Node.js (gồm cả .env)
+COPY / ./
+# Copy Python requirements và cài đặt
+WORKDIR /app/
+COPY /requirements.txt ./
+RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
-# Sao chép và cài đặt Python dependencies
+# Copy toàn bộ source code Python
+COPY python_script/ ./
+#tìm thằng lồn j.js
+RUN echo "Listing node_app files:" && ls -la /app/
+# Quay lại thư mục chính để khởi động
 WORKDIR /app
-COPY python_script/requirements.txt ./python_script/
-RUN pip3 install --no-cache-dir -r python_script/requirements.txt
 
-# Sao chép toàn bộ mã nguồn Python
-COPY python_script/ ./python_script/
+# Thiết lập biến môi trường mặc định
+ENV PORT=3000
 
-# Thiết lập biến môi trường
-ENV PORT=9898
-
-# Lệnh khởi chạy Node.js app
-CMD ["node", "node_app/j.js"]
+# Lệnh khởi chạy ứng dụng Node.js
+CMD ["node", "j.js"]
