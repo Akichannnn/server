@@ -46,6 +46,7 @@ app.get("/audio", async (req, res) => {
         extractAudio: true,
         audioFormat: 'mp3',
         audioQuality: '64K',
+        cookies: "./cookies.txt",
         ffmpegLocation: '/usr/bin/ffmpeg'
       });
     }
