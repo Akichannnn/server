@@ -112,20 +112,17 @@ app.get("/info", async (req, res) => {
 });
 
 // Route /search: tìm kiếm video trên YouTube thông qua API của googleapis
+
+let list = [];
 app.get("/search", async (req, res) => {
   try {
     const query = req.query.q;
-    if (!query) {
-      return res.status(400).send("Missing search query");
-    }
-    
     const response = await youtube.search.list({
       part: 'snippet',
       q: query,
       maxResults: 10,
       type: 'video'
     });
-    
     const videos = response.data.items.map(item => ({
       id: item.id.videoId,
       title: item.snippet.title,
@@ -133,13 +130,41 @@ app.get("/search", async (req, res) => {
       channel: item.snippet.channelTitle,
       publishedAt: item.snippet.publishedAt
     }));
-    
-    res.json(videos);
+   looksLikeMusic(videos);
+   res.json(list);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
+    console.log("lỗi ở phần tìm kiếm!");
   }
 });
+function looksLikeMusic(data) {
+  const includeKeywords = new Set([
+    "official video music", "lyrics", "track", "cover", "soundtrack",
+    "vevo", "ncs", "remix", "karaoke", "topic", "instrumental", "official", "audio"
+  ]);
+
+  const excludeKeywords = new Set([
+    "vlog", "shorts", "short", "minecraft", "reaction", "gaming", "asmr", "tiktok"
+  ]);
+
+  const filterList = data.filter(item => {
+    const lower = item.title.toLowerCase();
+    const channel = item.channel.toLowerCase();
+
+    // Ưu tiên loại trừ trước
+    for (const word of excludeKeywords) {
+      if (lower.includes(word)) return false;
+    }
+
+    // Sau đó kiểm tra xem có chứa từ khóa nhạc không
+    for (const word of includeKeywords) {
+      if (lower.includes(word) || channel.includes(word)) return true;
+    }
+
+    return false;
+  });
+
+  list = filterList;
+}
 
 // Route /playlist: lấy danh sách phát từ playlist YouTube
 app.get("/playlist", async (req, res) => {
