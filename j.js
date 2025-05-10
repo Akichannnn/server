@@ -138,12 +138,12 @@ app.get("/search", async (req, res) => {
 });
 function looksLikeMusic(data) {
   const includeKeywords = new Set([
-    "official video music", "lyrics", "track", "cover", "soundtrack",
-    "vevo", "ncs", "remix", "karaoke", "topic", "instrumental", "official", "audio"
+    "music", "lyrics", "track", "cover", "soundtrack",
+    "vevo","Spotify","Hot tiktok","SoundCloud","ncs", "remix", "karaoke", "topic", "instrumental", "official", "audio"
   ]);
 
   const excludeKeywords = new Set([
-    "vlog", "shorts", "short", "minecraft", "reaction", "gaming", "asmr", "tiktok"
+    "vlog", "shorts", "short", "minecraft", "reaction", "gaming", "asmr"
   ]);
 
   const filterList = data.filter(item => {
